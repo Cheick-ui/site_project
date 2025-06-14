@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rome - La Ville Éternelle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        /* === STYLES GLOBAUX === */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-color: #f5f5f5;
+            --header-bg: rgba(44, 62, 80, 0.9);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --gold-color: #d4af37;
+            --accent-color: #c53211;
+            --marble-color: #e8e6df;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+           /* background-color: var(--bg-color);*/
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-image: url('images/pexels-azhar-muhammedu-152002-3021382.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /*background-color: rgba(245, 245, 245, 0.85);*/
+            z-index: -1;
+        }
+
+        /* === EN-TÊTE ET NAVIGATION === */
+        header {
+            background-color: var(--header-bg);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* === CONTENU PRINCIPAL === */
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* === PAGE D'ACCUEIL === */
+        .hero {
+            height: 400px;
+            background: url('images/pexels-julius-silver-240301-753639.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            position: relative;
+            margin-bottom: 40px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .welcome-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .welcome-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .welcome-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* === PAGE PATRIMOINE === */
+        .patrimoine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .patrimoine-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .patrimoine-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .patrimoine-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .patrimoine-card h3 {
+            padding: 15px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        /* === PAGES DE SITES PATRIMOINE === */
+        .site-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .site-container h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .site-container img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+        }
+
+        .site-container h2 {
+            color: var(--secondary-color);
+            margin: 25px 0 15px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+        }
+
+        .site-container p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* === STYLES POUR LA SECTION RÉSERVATION (intégrés de sitex.html) === */
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: rgba(44, 62, 80, 0.2);
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            background: rgba(44, 62, 80, 0.3);
+            border-bottom: 3px solid var(--primary-color);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Styles pour la page des hôtels */
+        .hotels-hero {
+            background: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 2rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .hotels-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .hotels-hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .hotels-hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hotels-hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hotels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .hotel-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--gold-color);
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hotel-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--gold-color);
+        }
+
+        .hotel-content {
+            padding: 1.5rem;
+        }
+
+        .hotel-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .hotel-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hotel-rating {
+            color: #f1c40f;
+            margin-bottom: 1rem;
+        }
+
+        .hotel-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .hotel-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hotel-feature {
+            background-color: rgba(212, 175, 55, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hotel-feature i {
+            color: var(--gold-color);
+        }
+
+        .hotel-price {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .price-night {
+            font-size: 1rem;
+            color: #777;
+            font-weight: normal;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Styles pour la page de réservation */
+        .reservation-form-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .form-title {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.2);
+            outline: none;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .input-icon input {
+            padding-left: 40px;
+        }
+
+        .date-inputs {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .date-inputs .form-group {
+            flex: 1;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: #777;
+            pointer-events: none;
+        }
+
+        .select-wrapper select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Animation pour les cartes hôtel */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hotel-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .hotel-card:nth-child(1) { animation-delay: 0.1s; }
+        .hotel-card:nth-child(2) { animation-delay: 0.2s; }
+        .hotel-card:nth-child(3) { animation-delay: 0.3s; }
+        .hotel-card:nth-child(4) { animation-delay: 0.4s; }
+        .hotel-card:nth-child(5) { animation-delay: 0.5s; }
+        .hotel-card:nth-child(6) { animation-delay: 0.6s; }
+        .hotel-card:nth-child(7) { animation-delay: 0.7s; }
+        .hotel-card:nth-child(8) { animation-delay: 0.8s; }
+        .hotel-card:nth-child(9) { animation-delay: 0.9s; }
+        .hotel-card:nth-child(10) { animation-delay: 1s; }
+
+        /* === PAGE GALERIE === */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            height: 250px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(44, 62, 80, 0.8);
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Styles pour les galeries détaillées */
+        .gallery-detail {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin: 20px auto;
+            max-width: 1000px;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .detail-grid a {
+            display: block;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+        }
+        
+        .detail-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            transition: transform 0.3s;
+        }
+        
+        .detail-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        /* === PIED DE PAGE === */
+        footer {
+            background-color: var(--header-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 992px) {
+            .hotels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 0 10px 0.5rem;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                border-radius: 0;
+                width: 100%;
+            }
+
+            .tab-btn:first-child {
+                border-radius: var(--border-radius) var(--border-radius) 0 0;
+            }
+
+            .tab-btn:last-child {
+                border-radius: 0 0 var(--border-radius) var(--border-radius);
+            }
+
+            .date-inputs {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hotels-hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hotels-hero-content p {
+                font-size: 1rem;
+            }
+            
+            .hotel-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/téléchargement.png" alt="Logo Rome">
+                <h1>Rome</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#patrimoine">Patrimoine</a></li>
+                    <li><a href="#reservation">Réservation</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main>
+        <!-- Page d'accueil -->
+        <section id="accueil">
+            <div class="hero">
+                <div class="hero-content">
+                    <h2>Bienvenue à Rome</h2>
+                    <p>Découvrez la beauté éternelle de la Ville Éternelle</p>
+                </div>
+            </div>
+
+            <div class="welcome-section">
+                <h2>Rome: Une immersion dans l'éternité</h2>
+                <p>Capitale historique au charme infini, Rome est bien plus qu'une ville : c'est une émotion, un voyage dans le temps et un art de vivre. Ici, chaque pierre, chaque façade, chaque ruelle raconte une histoire. L'air y est chargé d'héritage, de beauté et d'inspiration.</p>
+               </div>
+
+            <div class="welcome-section">
+        <h2>Un théâtre vivant de l'Histoire</h2>
+                <p>Flâner dans les rues de Rome, c'est traverser les siècles sans quitter le présent. L'ancien y côtoie le moderne avec une harmonie naturelle, comme si le passé avait choisi de rester pour toujours. Les pavés millénaires, les façades patinées par le temps, les places baignées de lumière composent un décor unique, où l'Histoire semble respirer.</p>
+               </div>
+
+            <div class="welcome-section">
+        <h2>Une ville d'atmosphère</h2>
+                <p>À Rome, le quotidien a le goût du théâtre. Les conversations chantantes des habitants, les gestes larges, les sourires complices, tout y est vivant, vrai, vibrant. La ville invite à prendre son temps : s'asseoir à une terrasse, observer les passants, écouter la musique d'un violon perdu dans une ruelle... C'est une ville qui se savoure lentement.</p>
+            </div>
+
+<div class="welcome-section">
+        <h2>Le goût de la dolce vita</h2>
+        <p>Rome est aussi une fête pour les sens. On y mange avec passion, on y vit avec générosité. La cuisine y est simple mais authentique, les parfums de café ou de plats mijotés se mêlent à ceux des marchés colorés. Et partout, cette lumière dorée du soir, qui enveloppe la ville d'une douceur incomparable.</p>
+    </div>
+
+    <div class="welcome-section">
+        <h2>Une âme éternelle, une invitation permanente</h2>
+        <p>Rome ne se contente pas de séduire : elle appelle. Elle vous invite à découvrir ses trésors cachés, ses merveilles visibles et invisibles, son passé glorieux et son quotidien vibrant. Et même au-delà de ses murs officiels, dans cet État enclavé au cœur de la ville, elle continue de briller. Car ici, tout – même ce qui est techniquement indépendant – fait partie intégrante de l'âme romaine.</p>
+         <p></p>
+         <p>Venez découvrir Rome. Une ville aux mille visages, dont chaque recoin est une promesse d'émerveillement. Une destination inoubliable, où chaque instant devient souvenir.</p>
+    </div>
+
+        </section>
+
+        <!-- Page Patrimoine -->
+        <section id="patrimoine" style="display: none;">
+            <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">Patrimoine de Rome</h1>
+            
+            <div class="patrimoine-grid">
+                <!-- Colisée -->
+                <a href="#colisee" class="patrimoine-card">
+                    <img src="images/pexels-chaitaastic-1797161.jpg" alt="Colisée">
+                    <h3>Le Colisée</h3>
+                </a>
+
+                <!-- Forum Romain -->
+                <a href="#forum-romain" class="patrimoine-card">
+                    <img src="images/pexels-esrageziyor-45760220-21550404.jpg" alt="Forum Romain">
+                    <h3>Forum Romain</h3>
+                </a>
+
+                <!-- Panthéon -->
+                <a href="#pantheon" class="patrimoine-card">
+                    <img src="images/pexels-mikegiugliano-2928046.jpg" alt="Panthéon">
+                    <h3>Le Panthéon</h3>
+                </a>
+
+                <!-- Fontaine de Trevi -->
+                <a href="#fontaine-trevi" class="patrimoine-card">
+                    <img src="images/pexels-maxavans-5067076.jpg" alt="Fontaine de Trevi">
+                    <h3>Fontaine de Trevi</h3>
+                </a>
+
+                <!-- Place Navone -->
+                <a href="#place-navone" class="patrimoine-card">
+                    <img src="images/fountain-of-the-moor-485286.jpg" alt="Place Navone">
+                    <h3>Place Navone</h3>
+                </a>
+
+                <!-- Basilique Saint-Pierre -->
+                <a href="#basilique" class="patrimoine-card">
+                    <img src="images/pexels-omar-ramirez-vallejo-399619615-32491176.jpg" alt="Basilique Saint-Pierre">
+                    <h3>Basilique Saint-Pierre</h3>
+                </a>
+
+                <!-- Chapelle Sixtine -->
+                <a href="#chapelle" class="patrimoine-card">
+                    <img src="images/pexels-mustafa-serdengecti-214985131-11826844.jpg" alt="Chapelle Sixtine">
+                    <h3>Chapelle Sixtine</h3>
+                </a>
+
+                <!-- Château Saint-Ange -->
+                <a href="#chateau" class="patrimoine-card">
+                    <img src="images/rome-3800912.jpg" alt="Château Saint-Ange">
+                    <h3>Château Saint-Ange</h3>
+                </a>
+
+                <!-- Thermes de Caracalla -->
+                <a href="#thermes" class="patrimoine-card">
+                    <img src="images/ancient-rome-484702.jpg" alt="Thermes de Caracalla">
+                    <h3>Thermes de Caracalla</h3>
+                </a>
+
+                <!-- Piazza di Spagna -->
+                <a href="#piazza" class="patrimoine-card">
+                    <img src="images/pexels-natasa-dav-2885919.jpg" alt="Piazza di Spagna">
+                    <h3>Piazza di Spagna</h3>
+                </a>
+            </div>
+        </section>
+
+        <!-- Pages des sites patrimoniaux -->
+        <!-- Colisée -->
+        <div id="colisee" class="site-container" style="display: none;">
+            <h1>Le Colisée</h1>
+            <img src="images/pexels-chaitaastic-1797161.jpg" alt="Colisée">
+            
+            <h2>Histoire</h2>
+            <p>Sa construction a débuté en 72 ap. J.-C. sous l'empereur Vespasien et fut achevée en 80 par son fils Titus. Le Colisée symbolisait la puissance et la générosité impériale envers le peuple. Après l'Antiquité, il fut utilisé comme carrière de pierres et subit plusieurs tremblements de terre, mais il reste debout aujourd'hui comme un témoignage vivant de la Rome antique.</p>
+            
+            <h2>Découverte</h2>
+            <p>Le Colisée est l'un des monuments les plus emblématiques de Rome et de toute l'histoire de l'architecture antique. Ce gigantesque amphithéâtre pouvait accueillir jusqu'à 80 000 spectateurs venus assister à des combats de gladiateurs, chasses aux fauves et reconstitutions navales. Son ingénierie, avec ses gradins superposés et son système de circulation, montre le niveau avancé des Romains en matière de construction publique.</p>
+            
+            <a href="#patrimoine" class="back-button">Retour au patrimoine</a>
+        </div>
+
+        <!-- Forum Romain -->
+        <div id="forum-romain" class="site-container" style="display: none;">
+            <h1>Le Forum Romain</h1>
+            <img src="images/pexels-esrageziyor-45760220-21550404.jpg" alt="Forum Romain">
+            
+            <h2>Histoire</h2>
+            <p>Il a été construit progressivement à partir du VIIe siècle av. J.-C. et a connu son apogée sous la République puis l'Empire. Avec la chute de Rome, le forum fut peu à peu abandonné et enseveli. Il a été redécouvert et fouillé à partir du XIXe siècle, révélant des trésors d'architecture et de mémoire historique.</p>
+            
+            <h2>Découverte</h2>
+            <p>Le Forum Romain était le centre névralgique de la vie politique, religieuse et commerciale de la Rome antique. Il rassemblait temples, basiliques, arcs de triomphe et espaces de débat public. S'y promener aujourd'hui revient à traverser un musée à ciel ouvert de l'histoire romaine.</p>
+            
+            <a href="#patrimoine" class="back-button">Retour au patrimoine</a>
+        </div>
+
+        <!-- Panthéon -->
+        <div id="pantheon" class="site-container" style="display: none;"> 
+            <h1>Le Panthéon</h1> 
+            <img src="images/pexels-mikegiugliano-2928046.jpg" alt="Panthéon"> 
+             
+            <h2>Histoire</h2> 
+            <p>Le Panthéon est un ancien temple romain, construit initialement par Marcus Agrippa au Ier siècle av. J.-C., puis reconstruit par l'empereur Hadrien au début du IIe siècle ap. J.-C. C'est le monument romain antique le mieux conservé, principalement grâce à son usage continu. Il a été converti en église chrétienne 
+(Basilique Sainte-Marie-et-des-Martyrs) au VIIe siècle.</p> 
+             
+            <h2>Découverte</h2> 
+            <p>Admirez la coupole du Panthéon, la plus grande coupole en béton non armé du monde, avec son célèbre oculus (ouverture circulaire) qui est la seule source de lumière naturelle. Ce chef-d'œuvre architectural témoigne de l'ingéniosité romaine et offre une atmosphère unique, mêlant histoire païenne et dévotion chrétienne. 
+On y trouve également les tombes de rois d'Italie et de l'artiste 
+Raphaël.</p> 
+             
+            <a href="#patrimoine" class="back-button">Retour au patrimoine</a> 
+        </div> 
+        
+        <!-- Fontaine de Trevi -->
+        <div id="fontaine-trevi" class="site-container" style="display: none;"> 
+            <h1>Fontaine de Trevi</h1> 
+            <img src="images/pexels-maxavans-5067076.jpg" alt="Fontaine de Trevi"> 
+             
+            <h2>Histoire</h2> 
+            <p>La Fontana di Trevi, ou Fontaine de Trevi, est l'une des fontaines baroques les plus célèbres du monde. Sa construction a débuté en 1732 sous la direction de Nicola Salvi et a été achevée par Giuseppe Pannini en 1762. Elle est construite à l'extrémité de l'Aqua 
+Virgo, un aqueduc antique qui alimentait Rome en eau.</p> 
+             
+            <h2>Découverte</h2> 
+            <p>Cette fontaine monumentale représente le dieu Neptune sur son char tiré par des hippocampes et des tritons. C'est un chef-d'œuvre de sculpture et d'ingénierie. La tradition veut que quiconque jette une pièce de monnaie dans la fontaine en s'assurant de passer par-dessus son épaule droite avec la main gauche, est assuré de revenir un jour à Rome. Une deuxième pièce garantit une nouvelle romance, et une troisième, le mariage !</p> 
+             
+            <a href="#patrimoine" class="back-button">Retour au patrimoine</a> 
+        </div>  
+        
+        <!-- Place Navone -->
+        <div id="place-navone" class="site-container" style="display: none;"> 
+            <h1>Place Navone</h1> 
+            <img src="images/fountain-of-the-moor-485286.jpg" alt="Place 
+Navone"> 
+             
+            <h2>Histoire</h2> 
+            <p>La Piazza Navona occupe l'emplacement de l'ancien stade de Domitien (Ier siècle ap. J.-C.), d'où sa forme oblongue caractéristique. Au fil des siècles, elle est devenue un centre de vie publique, accueillant marchés, fêtes et joutes nautiques (quand elle était inondée). Elle a été transformée en une place baroque spectaculaire au XVIIe siècle, notamment grâce à la famille 
+Pamphili.</p> 
+             
+            <h2>Découverte</h2> 
+            <p>Cette place emblématique est ornée de trois magnifiques fontaines, dont la plus célèbre est la Fontaine des Quatre Fleuves 
+(Fontana dei Quattro Fiumi) du Bernin, représentant le Danube, le Nil, le Gange et le Rio de la Plata. C'est un lieu vibrant où artistes de rue, musiciens et touristes se côtoient, entourés de palais baroques et de l'église Sant'Agnese in Agone de Borromini. C'est l'endroit idéal pour savourer un café ou une glace.</p> 
+             
+            <a href="#patrimoine" class="back-button">Retour au patrimoine</a> 
+        </div> 
+ 
+        <!-- Basilique Saint-Pierre -->
+        <div id="basilique" class="site-container" style="display: none;"> 
+            <h1>Basilique Saint-Pierre</h1> 
+            <img src="images/pexels-omar-ramirez-vallejo-399619615-32491176.jpg" alt="Basilique 
+Saint-Pierre"> 
+             
+            <h2>Histoire</h2> 
+            <p>La Basilique Saint-Pierre, située au cœur de la Cité du 
+Vatican, est la plus grande église du monde et un site majeur du christianisme. Sa construction actuelle a commencé en 1506 et s'est achevée en 1626, sous la direction de nombreux architectes illustres, dont Bramante, Michel-Ange et Le Bernin. Elle est bâtie sur le lieu présumé du tombeau de Saint Pierre.</p> 
+             
+            <h2>Découverte</h2> 
+            <p>Imprégnez-vous de la grandeur de cette basilique aux dimensions colossales. Admirez la majestueuse coupole conçue par 
+Michel-Ange, la Pietà de Michel-Ange, un chef-d'œuvre de sculpture, et le baldaquin du Bernin qui s'élève au-dessus de l'autel papal. La place Saint-Pierre, conçue par Le Bernin, avec ses colonnades encerclantes, ajoute à la magnificence du site et est un lieu de rassemblement pour des milliers de fidèles lors des audiences papales.</p>              
+            <a href="#patrimoine" class="back-button">Retour au patrimoine</a> 
+        </div>  
+        
+        <!-- Chapelle Sixtine -->
+        <div id="chapelle" class="site-container" style="display: 
+none;"> 
+            <h1>Chapelle Sixtine</h1> 
+            <img src="images/pexels-mustafa-serdengecti-214985131-11826844.jpg" alt="Chapelle Sixtine"> 
+             
+            <h2>Histoire</h2> 
+            <p>La Chapelle Sixtine, située dans la Cité du Vatican, a été construite entre 1473 et 1481 sous le pontificat du Pape Sixte IV, dont elle tire son nom. Elle est célèbre mondialement pour ses fresques inestimables, en particulier le plafond et Le Jugement 
+Dernier peints par Michel-Ange.</p> 
+             
+            <h2>Découverte</h2> 
+            <p>La Chapelle Sixtine est l'une des plus grandes réalisations artistiques de l'humanité. Le plafond, peint par 
+Michel-Ange entre 1508 et 1512, représente des scènes de la Genèse, dont la célèbre "Création d'Adam". Le mur de l'autel est orné de son "Jugement Dernier", une fresque monumentale achevée en 1541. Au-delà de sa splendeur artistique, la chapelle est le lieu du Conclave, où les cardinaux élisent un nouveau pape.</p> 
+             
+            <a href="#patrimoine" class="back-button">Retour au patrimoine</a> 
+        </div>  
+        
+        <!-- Château Saint-Ange -->
+        <div id="chateau" class="site-container" style="display: none;"> 
+            <h1>Château Saint-Ange</h1> 
+            <img src="images/rome-3800912.jpg" alt="Château 
+Saint-Ange"> 
+             
+            <h2>Histoire</h2> 
+            <p>Initialement construit comme un mausolée pour l'empereur Hadrien au IIe siècle ap. J.-C., le Castel Sant'Angelo 
+(Château Saint-Ange) a eu une histoire des plus variées. Il a servi de forteresse papale, de prison, et est relié au Vatican par un passage fortifié, le "Passetto di Borgo". Sa forme cylindrique imposante domine le Tibre.</p> 
+             
+            <h2>Découverte</h2> 
+            <p>Explorez les nombreux niveaux de ce monument historique, depuis les anciennes rampes romaines jusqu'aux appartements papaux richement décorés, en passant par les cellules de prison. Le château offre des vues panoramiques spectaculaires sur 
+Rome, le Tibre et la Cité du Vatican depuis sa terrasse, où se dresse la statue de l'Archange Michel. C'est un lieu qui raconte des millénaires d'histoire romaine et papale.</p> 
+             
+            <a href="#patrimoine" class="back-button">Retour au patrimoine</a> 
+        </div>  
+        
+        <!-- Thermes de Caracalla -->
+        <div id="thermes" class="site-container" style="display: none;"> 
+            <h1>Thermes de Caracalla</h1> 
+            <img src="images/ancient-rome-484702.jpg" alt="Thermes de 
+Caracalla"> 
+             
+            <h2>Histoire</h2> 
+            <p>Les Thermes de Caracalla étaient d'immenses bains publics romains, construits entre 212 et 217 ap. J.-C. sous le règne de l'empereur Caracalla. Plus qu'un simple lieu de bain, c'était un complexe de loisirs et de culture qui comprenait des bibliothèques, des gymnases et des jardins. Ils ont été utilisés pendant plus de 300 ans avant d'être endommagés lors des invasions barbares et abandonnés au VIe siècle.</p> 
+             
+            <h2>Découverte</h2> 
+            <p>Bien que largement en ruines aujourd'hui, la grandeur et l'échelle des Thermes de Caracalla restent impressionnantes. 
+Promenez-vous parmi les vestiges des vastes salles, des piscines et des mosaïques, et imaginez la vie quotidienne des Romains qui venaient s'y détendre, faire de l'exercice et socialiser. Ce site offre un aperçu fascinant de l'ingénierie et de la vie sociale de la Rome antique.</p>              
+            <a href="#patrimoine" class="back-button">Retour au patrimoine</a> 
+        </div>  
+        
+        <!-- Piazza di Spagna -->
+        <div id="piazza" class="site-container" style="display: none;"> 
+            <h1>Piazza di Spagna</h1> 
+            <img src="images/pexels-natasa-dav-2885919.jpg" alt="Piazza di Spagna"> 
+             
+            <h2>Histoire</h2> 
+            <p>La Piazza di Spagna, ou Place d'Espagne, est l'une des places les plus célèbres de Rome, dominée par les escaliers monumentaux de la Trinité-des-Monts. Elle a été aménagée au XVIIe siècle, et les célèbres escaliers, conçus par Francesco de Sanctis et Alessandro Specchi, ont été construits entre 1723 et 1725 pour relier l'ambassade d'Espagne (qui lui a donné son nom) et l'église française de la Trinité-des-Monts.</p> 
+             
+            <h2>Découverte</h2> 
+            <p>Grimpez les 135 marches de l'escalier de la 
+Trinité-des-Monts, un lieu de rencontre populaire et un cadre magnifique pour des défilés de mode et des événements culturels. Au pied de l'escalier se trouve la Fontaine de la Barcaccia, œuvre du Bernin (père et fils). La place est entourée de boutiques de luxe et de cafés, en faisant un lieu incontournable pour se promener, observer les gens et s'imprégner de l'élégance romaine.</p> 
+             
+            <a href="#patrimoine" class="back-button">Retour au patrimoine</a> 
+        </div> 
+
+        <!-- Page Réservation (avec contenu de sitex.html) -->
+        <section id="reservation" style="display: none;">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="hotels">Nos Hôtels</button>
+                <button class="tab-btn" data-tab="reservation-form">Réservation</button>
+            </div>
+
+            <!-- Contenu de la page Hôtels -->
+            <div id="hotels" class="tab-content active">
+                <section class="hotels-hero">
+                    <div class="hotels-hero-content">
+                        <h1>Top 10 des Hôtels à Rome</h1>
+                        <p>Découvrez notre sélection exclusive des meilleurs hôtels au cœur de la Ville Éternelle</p>
+                    </div>
+                </section>
+
+                <div class="hotels-grid">
+                    <!-- Hôtel 1 -->
+                    <div class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Hotel Roma Imperial" class="hotel-image">
+                        <div class="hotel-content">
+                            <h3 class="hotel-title">Hotel Roma Imperial</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Via del Corso, 00186 Rome</span>
+                            </div>
+                            <div class="hotel-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(247 avis)</span>
+                            </div>
+                            <p class="hotel-description">
+                                Situé à quelques pas du Panthéon, cet hôtel 5 étoiles allie luxe moderne et charme historique. Les chambres offrent une vue imprenable sur les monuments emblématiques de Rome.
+                            </p>
+                            <div class="hotel-features">
+                                <span class="hotel-feature"><i class="fas fa-wifi"></i> WiFi gratuit</span>
+                                <span class="hotel-feature"><i class="fas fa-swimming-pool"></i> Piscine</span>
+                                <span class="hotel-feature"><i class="fas fa-spa"></i> Spa</span>
+                            </div>
+                            <div class="hotel-price">
+                                <span>À partir de <strong>€250</strong> <span class="price-night">/nuit</span></span>
+                            </div>
+            <div class="tab-buttons">
+
+                                            <button class="tab-btn" data-tab="reservation-form">Réserver</button>
+</div>
+                        </div>
+                    </div>
+
+                    <!-- Hôtel 2 -->
+                    <div class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Palazzo Navona" class="hotel-image">
+                        <div class="hotel-content">
+                            <h3 class="hotel-title">Palazzo Navona</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Piazza Navona, 00186 Rome</span>
+                            </div>
+                            <div class="hotel-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(189 avis)</span>
+                            </div>
+                            <p class="hotel-description">
+                                Un élégant palais du XVIe siècle transformé en hôtel boutique. Chaque chambre est décorée de fresques uniques et offre une vue sur la célèbre Piazza Navona.
+                            </p>
+                            <div class="hotel-features">
+                                <span class="hotel-feature"><i class="fas fa-utensils"></i> Restaurant</span>
+                                <span class="hotel-feature"><i class="fas fa-concierge-bell"></i> Concierge</span>
+                                <span class="hotel-feature"><i class="fas fa-child"></i> Familles</span>
+                            </div>
+                            <div class="hotel-price">
+                                <span>À partir de <strong>€250</strong> <span class="price-night">/nuit</span></span>
+                            </div>
+                            <div class="tab-buttons">
+
+                                            <button class="tab-btn" data-tab="reservation-form">Réserver</button>
+</div>
+                        </div>
+                    </div>
+
+                    <!-- Hôtel 3 -->
+                    <div class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Villa Medici" class="hotel-image">
+                        <div class="hotel-content">
+                            <h3 class="hotel-title">Villa Medici</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Trastevere, 00153 Rome</span>
+                            </div>
+                            <div class="hotel-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                <span>(312 avis)</span>
+                            </div>
+                            <p class="hotel-description">
+                                Une villa Renaissance transformée en hôtel boutique avec jardin privé. Situé dans le quartier bohème de Trastevere, idéal pour ceux qui cherchent l'authenticité romaine.
+                            </p>
+                            <div class="hotel-features">
+                                <span class="hotel-feature"><i class="fas fa-parking"></i> Parking</span>
+                                <span class="hotel-feature"><i class="fas fa-umbrella-beach"></i> Terrasse</span>
+                                <span class="hotel-feature"><i class="fas fa-wine-glass-alt"></i> Bar à vin</span>
+                            </div>
+                            <div class="hotel-price">
+                                <span>À partir de <strong>€180</strong> <span class="price-night">/nuit</span></span>
+                            </div>
+                            <div class="tab-buttons">
+
+                                            <button class="tab-btn" data-tab="reservation-form">Réserver</button>
+</div>
+                        </div>
+                    </div>
+
+                    <!-- Hôtel 4 -->
+                    <div class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2089&q=80" alt="The Pantheon View" class="hotel-image">
+                        <div class="hotel-content">
+                            <h3 class="hotel-title">The Pantheon View</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Piazza della Rotonda, 00186 Rome</span>
+                            </div>
+                            <div class="hotel-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(428 avis)</span>
+                            </div>
+                            <p class="hotel-description">
+                                Comme son nom l'indique, cet hôtel offre une vue directe sur le Panthéon depuis ses chambres supérieures. Architecture moderne dans un bâtiment historique.
+                            </p>
+                            <div class="hotel-features">
+                                <span class="hotel-feature"><i class="fas fa-binoculars"></i> Vue exceptionnelle</span>
+                                <span class="hotel-feature"><i class="fas fa-utensils"></i> Petit-déj. rooftop</span>
+                                <span class="hotel-feature"><i class="fas fa-baby"></i> Adapté familles</span>
+                            </div>
+                            <div class="hotel-price">
+                                <span>À partir de <strong>€290</strong> <span class="price-night">/nuit</span></span>
+                            </div>
+                            <div class="tab-buttons">
+
+                                            <button class="tab-btn" data-tab="reservation-form">Réserver</button>
+</div>
+                        </div>
+                    </div>
+
+                    <!-- Hôtel 5 -->
+                    <div class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Domus Aurea Suites" class="hotel-image">
+                        <div class="hotel-content">
+                            <h3 class="hotel-title">Domus Aurea Suites</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Via Cavour, 00184 Rome</span>
+                            </div>
+                            <div class="hotel-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(176 avis)</span>
+                            </div>
+                            <p class="hotel-description">
+                                Suites spacieuses inspirées par l'opulence de la Rome antique. Chaque suite possède sa propre décoration thématique (impériale, sénatoriale, vestale).
+                            </p>
+                            <div class="hotel-features">
+                                <span class="hotel-feature"><i class="fas fa-hot-tub"></i> Jacuzzi privé</span>
+                                <span class="hotel-feature"><i class="fas fa-concierge-bell"></i> Service VIP</span>
+                                <span class="hotel-feature"><i class="fas fa-car"></i> Transfert aéroport</span>
+                            </div>
+                            <div class="hotel-price">
+                                <span>À partir de <strong>€420</strong> <span class="price-night">/nuit</span></span>
+                            </div>
+                            <div class="tab-buttons">
+
+                                            <button class="tab-btn" data-tab="reservation-form">Réserver</button>
+</div>
+                        </div>
+                    </div>
+
+                    <!-- Hôtel 6 -->
+                    <div class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="The Spanish Steps Residence" class="hotel-image">
+                        <div class="hotel-content">
+                            <h3 class="hotel-title">The Spanish Steps Residence</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Piazza di Spagna, 00187 Rome</span>
+                            </div>
+                            <div class="hotel-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(342 avis)</span>
+                            </div>
+                            <p class="hotel-description">
+                                Appartements-hôtels de luxe à 50 mètres de la célèbre place d'Espagne. Idéal pour les longs séjours, avec kitchenette équipée et service hôtelier 5 étoiles.
+                            </p>
+                            <div class="hotel-features">
+                                <span class="hotel-feature"><i class="fas fa-home"></i> Appartement</span>
+                                <span class="hotel-feature"><i class="fas fa-shopping-bag"></i> Quartier shopping</span>
+                                <span class="hotel-feature"><i class="fas fa-chess-queen"></i> Confort royal</span>
+                            </div>
+                            <div class="hotel-price">
+                                <span>À partir de <strong>€320</strong> <span class="price-night">/nuit</span></span>
+                            </div>
+                            <div class="tab-buttons">
+
+                                            <button class="tab-btn" data-tab="reservation-form">Réserver</button>
+</div>
+                        </div>
+                    </div>
+
+                    <!-- Hôtel 7 -->
+                    <div class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1522798514-97ceb8c4f1c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Colosseum Grand Hotel" class="hotel-image">
+                        <div class="hotel-content">
+                            <h3 class="hotel-title">Colosseum Grand Hotel</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Via dei Fori Imperiali, 00184 Rome</span>
+                            </div>
+                            <div class="hotel-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                <span>(521 avis)</span>
+                            </div>
+                            <p class="hotel-description">
+                                Vue imprenable sur le Colisée depuis la terrasse panoramique. Chambres modernes avec touches antiques. Spa romain authentique avec bains thermaux.
+                            </p>
+                            <div class="hotel-features">
+                                <span class="hotel-feature"><i class="fas fa-landmark"></i> Proche monuments</span>
+                                <span class="hotel-feature"><i class="fas fa-spa"></i> Thermes romains</span>
+                                <span class="hotel-feature"><i class="fas fa-hiking"></i> Visites guidées</span>
+                            </div>
+                            <div class="hotel-price">
+                                <span>À partir de <strong>€230</strong> <span class="price-night">/nuit</span></span>
+                            </div>
+                            <div class="tab-buttons">
+
+                                            <button class="tab-btn" data-tab="reservation-form">Réserver</button>
+</div>
+                        </div>
+                    </div>
+
+                    <!-- Hôtel 8 -->
+                    <div class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Vatican Gardens Hotel" class="hotel-image">
+                        <div class="hotel-content">
+                            <h3 class="hotel-title">Vatican Gardens Hotel</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Via Leone IV, 00192 Rome</span>
+                            </div>
+                            <div class="hotel-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(287 avis)</span>
+                            </div>
+                            <p class="hotel-description">
+                                Le seul hôtel avec accès privé aux jardins du Vatican. Décoration inspirée par l'art sacré. Parfait pour les pèlerins et amateurs d'art religieux.
+                            </p>
+                            <div class="hotel-features">
+                                <span class="hotel-feature"><i class="fas fa-church"></i> Accès Vatican</span>
+                                <span class="hotel-feature"><i class="fas fa-praying-hands"></i> Chapelle privée</span>
+                                <span class="hotel-feature"><i class="fas fa-bible"></i> Visites exclusives</span>
+                            </div>
+                            <div class="hotel-price">
+                                <span>À partir de <strong>€350</strong> <span class="price-night">/nuit</span></span>
+                            </div>
+                            <div class="tab-buttons">
+
+                                            <button class="tab-btn" data-tab="reservation-form">Réserver</button>
+</div>
+                        </div>
+                    </div>
+
+                    <!-- Hôtel 9 -->
+                    <div class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tiber Palace" class="hotel-image">
+                        <div class="hotel-content">
+                            <h3 class="hotel-title">Tiber Palace</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Lungotevere, 00186 Rome</span>
+                            </div>
+                            <div class="hotel-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(198 avis)</span>
+                            </div>
+                            <p class="hotel-description">
+                                Palais néoclassique sur les rives du Tibre. Piscine intérieure dans des anciennes citernes romaines. Restaurant étoilé avec spécialités de poisson.
+                            </p>
+                            <div class="hotel-features">
+                                <span class="hotel-feature"><i class="fas fa-swimming-pool"></i> Piscine historique</span>
+                                <span class="hotel-feature"><i class="fas fa-fish"></i> Cuisine méditerranéenne</span>
+                                <span class="hotel-feature"><i class="fas fa-water"></i> Vue sur le Tibre</span>
+                            </div>
+                            <div class="hotel-price">
+                                <span>À partir de <strong>€275</strong> <span class="price-night">/nuit</span></span>
+                            </div>
+                            <div class="tab-buttons">
+
+                                            <button class="tab-btn" data-tab="reservation-form">Réserver</button>
+</div>
+                        </div>
+                    </div>
+
+                    <!-- Hôtel 10 -->
+                    <div class="hotel-card">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="The Gladiator's Rest" class="hotel-image">
+                        <div class="hotel-content">
+                            <h3 class="hotel-title">The Gladiator's Rest</h3>
+                            <div class="hotel-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Via Appia Antica, 00179 Rome</span>
+                            </div>
+                            <div class="hotel-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span>(154 avis)</span>
+                            </div>
+                            <p class="hotel-description">
+                                Concept unique : chambres inspirées des casernes de gladiateurs avec luxe moderne. Expérience immersive avec dîners-spectacles et entraînements ludiques.
+                            </p>
+                            <div class="hotel-features">
+                                <span class="hotel-feature"><i class="fas fa-helmet-battle"></i> Expérience thématique</span>
+                                <span class="hotel-feature"><i class="fas fa-theater-masks"></i> Spectacles</span>
+                                <span class="hotel-feature"><i class="fas fa-bus"></i> Navette centre-ville</span>
+                            </div>
+                            <div class="hotel-price">
+                                <span>À partir de <strong>€210</strong> <span class="price-night">/nuit</span></span>
+                            </div>
+                            <div class="tab-buttons">
+
+                                            <button class="tab-btn" data-tab="reservation-form">Réserver</button>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenu de la page Réservation -->
+            <div id="reservation-form" class="tab-content">
+                <div class="ation-form-container">
+                    <h1 class="form-title">Formulaire de Réservation</h1>
+                    
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="fullname">Nom complet :</label>
+                            <div class="input-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="fullname" name="fullname" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Adresse e-mail :</label>
+                            <div class="input-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Numéro de téléphone :</label>
+                            <div class="input-icon">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" id="phone" name="phone" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="date-inputs">
+                            <div class="form-group">
+                                <label for="checkin">Date d'arrivée :</label>
+                                <input type="date" id="checkin" name="checkin" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="checkout">Date de départ :</label>
+                                <input type="date" id="checkout" name="checkout" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guests">Nombre de personnes :</label>
+                            <div class="select-wrapper">
+                                <select id="guests" name="guests" class="form-control" required>
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                    <option value="5+">5+ personnes</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="room-type">Type de chambre :</label>
+                            <div class="select-wrapper">
+                                <select id="room-type" name="room-type" class="form-control" required>
+                                    <option value="standard">Chambre Standard</option>
+                                    <option value="deluxe">Chambre Deluxe</option>
+                                    <option value="suite">Suite</option>
+                                    <option value="executive">Suite Exécutive</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="special-requests">Demandes spéciales :</label>
+                            <textarea id="special-requests" name="special-requests" class="form-control" rows="4"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Confirmer la réservation</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page Galerie -->
+        <section id="galerie" style="display: none;">
+            <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">Galerie de Rome</h1>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <a href="#colisee-gallery">
+                        <img src="Images/pexels-pixabay-356966.jpg" alt="Colisée">
+                        <div class="gallery-caption">Le Colisée</div>
+                    </a>
+                </div>
+                
+                <div class="gallery-item">
+                    <a href="#caracalla-gallery">
+                        <img src="images/unnamed.jpg" alt="Thermes de Caracalla">
+                        <div class="gallery-caption">Thermes de Caracalla</div>
+                    </a>
+                </div>
+                
+                <div class="gallery-item">
+                    <a href="#basilique-gallery">
+                        <img src="Images/pexels-omar-ramirez-vallejo-399619615-32491176.jpg" alt="Basilique Saint-Pierre">
+                        <div class="gallery-caption">Basilique Saint-Pierre</div>
+                    </a>
+                </div>
+                
+                <div class="gallery-item">
+                    <a href="#saint-ange-gallery">
+                        <img src="Images/rome-3800912.jpg" alt="Château Saint-Ange">
+                        <div class="gallery-caption">Château Saint-Ange</div>
+                    </a>
+                </div>
+                
+                <div class="gallery-item">
+                    <a href="#piazza-gallery">
+                        <img src="Images/pexels-natasa-dav-2885919.jpg" alt="Piazza di Spagna">
+                        <div class="gallery-caption">Piazza di Spagna</div>
+                    </a>
+                </div>
+                
+                <div class="gallery-item">
+                    <a href="#pantheon-gallery">
+                        <img src="Images/pexels-mikegiugliano-2928046.jpg" alt="Panthéon">
+                        <div class="gallery-caption">Le Panthéon</div>
+                    </a>
+                </div>
+                
+                <div class="gallery-item">
+                    <a href="#navone-gallery">
+                        <img src="Images/fountain-of-the-moor-485286.jpg" alt="Place Navone">
+                        <div class="gallery-caption">Place Navone</div>
+                    </a>
+                </div>
+                
+                <div class="gallery-item">
+                    <a href="#vatican-gallery">
+                        <img src="Images/rome-2527666.jpg" alt="Musées du Vatican">
+          <div class="gallery-caption">Les musées du Vatican</div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Galeries détaillées -->
+        <!-- Galerie Colisée -->
+        <div id="colisee-gallery" class="gallery-detail" style="display: none;">
+            <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">Galerie du Colisée</h1>
+            <div class="detail-grid">
+                <a href="Images/pexels-pixabay-356966.jpg" target="_blank">
+                    <img src="Images/pexels-pixabay-356966.jpg" alt="Colisée vue extérieure">
+                </a>
+                <a href="Images/pexels-chaitaastic-1797161.jpg" target="_blank">
+                    <img src="Images/pexels-chaitaastic-1797161.jpg" alt="Colisée vue intérieure">
+                </a>
+                <a href="Images/colosseum-5773684.jpg" target="_blank">
+                    <img src="Images/colosseum-5773684.jpg" alt="Colisée de nuit">
+                </a>
+                <a href="Images/pexels-mark-neal-201020-2225443.jpg" target="_blank">
+                    <img src="Images/pexels-mark-neal-201020-2225443.jpg" alt="Détails architecturaux du Colisée">
+                </a>
+            </div>
+            <a href="#galerie" class="back-button">Retour à la galerie</a>
+        </div>
+
+        <!-- Galerie Thermes de Caracalla -->
+        <div id="caracalla-gallery" class="gallery-detail" style="display: none;">
+            <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">Galerie des Thermes de Caracalla</h1>
+            <div class="detail-grid">
+                <a href="images/unnamed.jpg" target="_blank">
+                    <img src="images/unnamed.jpg" alt="Vue générale des Thermes">
+                </a>
+                <a href="images/unnamd.jpg" target="_blank">
+                    <img src="images/unnamd.jpg" alt="Détails des mosaïques">
+                </a>
+                <a href="images/ancient-rome-484705_1920.jpg" target="_blank">
+                    <img src="images/ancient-rome-484705_1920.jpg" alt="Vue aérienne">
+                </a>
+                <a href="images/ancient-rome-484702.jpg" target="_blank">
+                    <img src="images/ancient-rome-484702.jpg" alt="Arcades des Thermes">
+                </a>
+            </div>
+            <a href="#galerie" class="back-button">Retour à la galerie</a>
+        </div>
+
+        <!-- Galerie Basilique Saint-Pierre -->
+        <div id="basilique-gallery" class="gallery-detail" style="display: none;">
+            <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">Galerie de la Basilique Saint-Pierre</h1>
+            <div class="detail-grid">
+                <a href="Images/pexels-omar-ramirez-vallejo-399619615-32491176.jpg" target="_blank">
+                    <img src="Images/pexels-omar-ramirez-vallejo-399619615-32491176.jpg" alt="Façade de la Basilique">
+                </a>
+                <a href="Images/pexels-omar-ramirez-vallejo-399619615-32491177.jpg" target="_blank">
+                    <img src="Images/pexels-omar-ramirez-vallejo-399619615-32491177.jpg" alt="Intérieur de la Basilique">
+                </a>
+                <a href="Images/pexels-tomas-anunziata-129267-412080.jpg" target="_blank">
+                    <img src="Images/pexels-tomas-anunziata-129267-412080.jpg" alt="Coupole de la Basilique">
+                </a>
+                <a href="Images/pexels-chaitaastic-1797163.jpg" target="_blank">
+                    <img src="Images/pexels-chaitaastic-1797163.jpg" alt="Place Saint-Pierre">
+                </a>
+            </div>
+            <a href="#galerie" class="back-button">Retour à la galerie</a>
+        </div>
+
+        <!-- Galerie Château Saint-Ange -->
+        <div id="saint-ange-gallery" class="gallery-detail" style="display: none;">
+            <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">Galerie du Château Saint-Ange</h1>
+            <div class="detail-grid">
+                <a href="Images/rome-3800912.jpg" target="_blank">
+                    <img src="Images/rome-3800912.jpg" alt="Château Saint-Ange vue générale">
+                </a>
+                <a href="Images/castel-santangelo-214950.jpg" target="_blank">
+                    <img src="Images/castel-santangelo-214950.jpg" alt="Passetto di Borgo">
+                </a>
+                <a href="Images/rome-3804985.jpg" target="_blank">
+                    <img src="Images/rome-3804985.jpg" alt="Terrasse du Château">
+                </a>
+             
+                </a>
+            </div>
+            <a href="#galerie" class="back-button">Retour à la galerie</a>
+        </div>
+
+        <!-- Galerie Piazza di Spagna -->
+        <div id="piazza-gallery" class="gallery-detail" style="display: none;">
+            <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">Galerie de la Piazza di Spagna</h1>
+            <div class="detail-grid">
+                <a href="Images/pexels-natasa-dav-2885919.jpg" target="_blank">
+                    <img src="Images/pexels-natasa-dav-2885919.jpg" alt="Escalier de la Trinité-des-Monts">
+                </a>
+                <a href="Images/jacob-cartwright-HqWY6w9j2k4-unsplash.jpg" target="_blank">
+                    <img src="Images/jacob-cartwright-HqWY6w9j2k4-unsplash.jpg" alt="Fontaine de la Barcaccia">
+                </a>
+                <a href="Images/shai-pal-3rbqwaYnf4w-unsplash.jpg" target="_blank">
+                    <img src="Images/shai-pal-3rbqwaYnf4w-unsplash.jpg" alt="Vue aérienne">
+                </a>
+                <a href="Images/rome-2294191.jpg" target="_blank">
+                    <img src="Images/rome-2294191.jpg" alt="Ambiance nocturne">
+                </a>
+            </div>
+            <a href="#galerie" class="back-button">Retour à la galerie</a>
+        </div>
+
+        <!-- Galerie Panthéon -->
+        <div id="pantheon-gallery" class="gallery-detail" style="display: none;">
+            <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">Galerie du Panthéon</h1>
+            <div class="detail-grid">
+                <a href="Images/pexels-mikegiugliano-2928046.jpg" target="_blank">
+                    <img src="Images/pexels-mikegiugliano-2928046.jpg" alt="Façade du Panthéon">
+                </a>
+                <a href="Images/pexels-griffinw-2676602.jpg" target="_blank">
+                    <img src="Images/pexels-griffinw-2676602.jpg" alt="Intérieur du Panthéon">
+                </a>
+                <a href="Images/pantheon-1233927.jpg" target="_blank">
+                    <img src="Images/pantheon-1233927.jpg" alt="Coupole et oculus">
+                </a>
+                <a href="Images/rome-5008962.jpg" target="_blank">
+                    <img src="Images/rome-5008962.jpg" alt="Place de la Rotonde">
+                </a>
+            </div>
+            <a href="#galerie" class="back-button">Retour à la galerie</a>
+        </div>
+
+        <!-- Galerie Place Navone -->
+        <div id="navone-gallery" class="gallery-detail" style="display: none;">
+            <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">Galerie de la Place Navone</h1>
+            <div class="detail-grid">
+                <a href="Images/fountain-of-the-moor-485286.jpg" target="_blank">
+                    <img src="Images/fountain-of-the-moor-485286.jpg" alt="Vue générale de la place">
+                </a>
+                <a href="Images/pexels-philip-samandar-776658-17395972.jpg" target="_blank">
+                    <img src="Images/pexels-philip-samandar-776658-17395972.jpg" alt="Fontaine des Quatre Fleuves">
+                </a>
+                <a href="Images/pexels-maria-man-56681100-7877896.jpg" target="_blank">
+                    <img src="Images/pexels-maria-man-56681100-7877896.jpg" alt="Artistes de rue">
+                </a>
+      
+            </div>
+            <a href="#galerie" class="back-button">Retour à la galerie</a>
+        </div>
+
+        <!-- Galerie Musées du Vatican -->
+        <div id="vatican-gallery" class="gallery-detail" style="display: none;">
+            <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 30px;">Galerie des Musées du Vatican</h1>
+            <div class="detail-grid">
+                <a href="Images/rome-2527666.jpg" target="_blank">
+                    <img src="Images/rome-2527666.jpg" alt="Escalier des Musées">
+                </a>
+                <a href="Images/pexels-padurarul-340981.jpg" target="_blank">
+                    <img src="Images/pexels-padurarul-340981.jpg" alt="Galerie des cartes">
+                </a>
+                <a href="Images/pexels-jeswin-3037096.jpg" target="_blank">
+                    <img src="Images/pexels-jeswin-3037096.jpg" alt="Chambres de Raphaël">
+                </a>
+                <a href="Images/pexels-gabriele-donofrio-2150198707-32465546.jpg" target="_blank">
+                    <img src="Images/pexels-gabriele-donofrio-2150198707-32465546.jpg" alt="Cour du Belvédère">
+                </a>
+            </div>
+            <a href="#galerie" class="back-button">Retour à la galerie</a>
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; Juin 2025 DOULKOM K.Rock Arsène & BOLLY Cheick Sékou  - Tous droits réservés</p>
+    </footer>
+
+    <script>
+        // Gestion de la navigation entre les pages
+        document.addEventListener('DOMContentLoaded', function() {
+            // Afficher la page d'accueil par défaut
+            showPage('accueil');
+            
+            // Gérer les clics sur les liens de navigation
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('href').substring(1);
+                    showPage(pageId);
+                });
+            });
+            
+            // Gérer les liens internes (pour les boutons de retour)
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault();
+                        const pageId = this.getAttribute('href').substring(1);
+                        showPage(pageId);
+                    }
+                });
+            });
+
+            // Gestion des onglets dans la section réservation
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Retirer la classe active de tous les boutons
+                    document.querySelectorAll('.tab-btn').forEach(b => {
+                        b.classList.remove('active');
+                    });
+                    
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('active');
+                    
+                    // Masquer tous les contenus d'onglet
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Afficher le contenu de l'onglet sélectionné
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+        
+        function showPage(pageId) {
+            // Masquer toutes les pages
+            document.querySelectorAll('main > section, main > div').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Afficher la page demandée
+            const pageToShow = document.getElementById(pageId);
+            if (pageToShow) {
+                pageToShow.style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+        }
+    </script>
+</body>
+</html>
